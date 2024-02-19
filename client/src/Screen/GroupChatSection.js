@@ -8,7 +8,7 @@ import CatchAMatch from "../Component/CatchAMatch";
 
 const GroupChatSection = () => {
   return (
-    <div className="flex justify-between bg-cgreen h-[90vh] overflow-y-hidden">
+    <div className="flex justify-between bg-black h-[90vh] overflow-y-hidden">
       <div>
         <Profile />
         <Skills />

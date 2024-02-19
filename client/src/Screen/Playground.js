@@ -9,7 +9,7 @@ import ChatSection from "./ChatSection";
 
 const Main = () => {
   return (
-    <div className="flex justify-between bg-cgreen h-[90vh] overflow-y-hidden">
+    <div className="flex justify-between bg-black h-[90vh] overflow-y-hidden">
       <div>
         <Profile />
         <Skills />

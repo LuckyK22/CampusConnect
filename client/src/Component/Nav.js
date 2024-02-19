@@ -7,7 +7,7 @@ import { BsCheckLg, BsQuestionLg } from "react-icons/bs";
 import { AiOutlineUser } from "react-icons/ai";
 import Context from "../Context/Context";
 import Faq from "../Screen/Faq";
-import Portfolio from "../Screen/Portfolio";
+// import Portfolio from "../Screen/Portfolio";
 
 const Nav = ({ checkUser }) => {
   const history = useNavigate();
@@ -24,18 +24,13 @@ const Nav = ({ checkUser }) => {
         <Faq modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} />
       </div>
       <div className="bg-navyBlue text-grey flex items-center py-1 justify-between border-b border-gray-500">
-        <img
-          src="/logo.png"
-          className="w-[15.5vw] ml-1 cursor-pointer"
-          onClick={(e) => {
-            e.preventDefault();
-            history("/home");
-          }}
-          alt="This is an logo"
-        />
+        <h3 onClick={(e) => {
+          e.preventDefault();
+          history("/home")
+        }} className="text-2xl font-semibold cursor-pointer">CampusConnect</h3>
         {location.pathname === "/" ||
-        location.pathname === "/register" ||
-        location.pathname === "/Register" ? null : (
+          location.pathname === "/register" ||
+          location.pathname === "/Register" ? null : (
           <div className="flex items-center justify-end mr-3">
             {displaySearch ? (
               <input
@@ -56,7 +51,7 @@ const Nav = ({ checkUser }) => {
               }}
               className="ml-2 border p-1.5 rounded-2xl cursor-pointer"
             />
-            <img
+            {/* <img
               src="/playground.png"
               onClick={(e) => {
                 e.preventDefault();
@@ -65,7 +60,7 @@ const Nav = ({ checkUser }) => {
               className={`${
                 displaySearch ? "w-[6%]" : "w-[8.5%]"
               } cursor-pointer ml-2`}
-            />
+            /> */}
             <div
               onClick={(e) => {
                 e.preventDefault();
@@ -121,25 +116,22 @@ const Nav = ({ checkUser }) => {
           </button>
         </div>
       ) : null}
-      {search.length > 0 ? (
+      {search.length > 0 && context?.allUsers ? (
         <div className="w-[15vw] z-10 h-[15vh] overflow-y-scroll bg-navyBlue absolute right-[24%] rounded-lg border text-grey top-[8.5%] flex flex-col items-center justify-center">
-          {context?.allUsers
-            .filter((e) => {
-              return e.userName.includes(search.toLowerCase());
-            })
-            .map((e) => {
-              return (
-                <div
-                  className="w-full"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setSearch("");
-                  }}
-                >
-                  <Block data={e} />
-                </div>
-              );
-            })}
+          {context.allUsers
+            .filter((e) => e.userName && e.userName.includes(search.toLowerCase()))
+            .map((e) => (
+              <div
+                key={e.id} // Make sure to set a unique key for each child element
+                className="w-full"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSearch("");
+                }}
+              >
+                <Block data={e} />
+              </div>
+            ))}
         </div>
       ) : null}
     </>
